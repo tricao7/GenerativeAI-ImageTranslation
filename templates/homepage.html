@@ -1,41 +1,186 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery Showcase</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap">
     <style>
-        html * {
-            line-height: 1.625;
-            color: #181616;
-            font-family: 'Courier New', Courier, monospace;
-            }
-    </style>
-    <head>
-        <meta charset="UTF-8">
-        <title>Basic HTML Template</title>
-    </head>
-    <body>
-        <center>
-            <h1 style="font-size:40pt">
-            Generate Image Captions</h1>
-        </center>
-    </body>
-    <body style="background-color:rgb(233, 217, 198)">
-        <center>
-            <img src="{{ image_file }}"class="image" border="3"
-                style="max-width:600px;width:100%"/>
-            <p>'Skier In Mid Air Over Snowy Mountain With Mountain In Background'</p>
-        </center>
-    </body>
-</html>
+        body {
+            font-family: 'Cinzel', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; /* Light grey background */
+            color: #333; /* Dark grey text */
+        }
 
-<!DOCTYPE html>
-<html>
-    <center>
-        <body>
-            <h1>Upload Your Image or Image URL</h1>
-        </body>
-        <form method=post enctype=multipart/form-data>
-            <input type=file name=file>
-            <input type="text" name="image_url" placeholder="Image URL">
+        .header {
+            position: relative;
+            height: 50vh; /* Reduced height for half-screen */
+            background-image: url('./static/images/header_background.jpg'); /* Replace 'header-background.jpg' with your image */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .header-text {
+            color: #333; /* Dark grey text */
+            font-size: 56px; /* Increased size for impact */
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        }
+
+        .header-subtext {
+            color: #333; /* Dark grey text */
+            font-size: 24px; /* Adjusted size for balance */
+            font-weight: 400;
+            margin-bottom: 40px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1080px; /* Narrowed slightly for a more focused feel */
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333; /* Dark grey text */
+            font-family: 'Cinzel', serif;
+            font-size: 36px; /* Reduced size for balance */
+        }
+
+        .image-slider {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .image-slide {
+            flex: 0 1 calc(25% - 20px); /* Each image slide takes roughly one-third of the container width with some margin */
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .image-slide img {
+            max-width: 100%;
+            height: auto;
+            border: 4px solid #ddd; /* Light grey border around image */
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        .uploaded_image img {
+            max-width: 100%;
+            height: auto;
+            border: 4px solid #ddd; /* Light grey border around image */
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        .caption {
+            margin-top: 10px;
+            color: #333; /* Dark grey text */
+            background-color: #f5f5f5; /* Light grey background for caption */
+            padding: 10px;
+            border: 2px solid #ddd; /* Light grey border around caption */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        form {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="file"],
+        input[type="submit"] {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: hwb(213 61% 5%); /* Dark blue background */
+            color: #fff; /* White text */
+            font-size: 16px;
+            font-weight: 700; /* Bold text for emphasis */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="file"]:focus,
+        input[type="submit"]:focus {
+            outline: none;
+        }
+
+        input[type="text"]:hover,
+        input[type="file"]:hover,
+        input[type="submit"]:hover {
+            background-color: hwb(213 61% 5%); /* Darker shade on hover for better contrast */
+        }
+
+        input[type="file"] {
+            padding: 5px 10px; /* Adjusted padding for better layout */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-overlay">
+            <div class="header-text">Image Captioning</div>
+            <div class="header-subtext">Providing Enhanced Captioning For Images Using Generative AI</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Image Captioning Showcase</h1>
+
+        <div class="image-slider">
+            <div class="image-slide">
+                <img src="./static/images/sample1.jpg" alt="Image 1">
+                <div class="caption">'Skier In Mid Air Over Snowy Mountain With Mountain In Background'</div>
+            </div>
+            <div class="image-slide">
+                <img src="./static/images/sample2.jpg" alt="Image 2">
+                <div class="caption">'A Man And A Woman In A Kayak Paddling In The Water'</div>
+            </div>
+            <div class="image-slide">
+                <img src="./static/images/sample3.jpeg" alt="Image 3">
+                <div class="caption">'Snow Leopard Standing On A Rock In The Snow With Trees In The Background'</div>
+            </div>
+            <div class="image-slide">
+                <img src="./static/images/sample4.jpg" alt="Image 4">
+                <div class="caption">'Arafed View Of A Hotel With A Pool And A Full Moon'</div>
+            </div>
+            <!-- Add more image slides as needed -->
+        </div>
+
+        <h1>Upload Your Own Image</h1>
+
+
+        <form id="image-upload-form" method="post" enctype="multipart/form-data">
+            <input type="text" name="image_url" placeholder="Enter image URL">
+            or
+            <input type="file" name="file">
             <label for="language">Choose Language:</label> 
             <select name="language" id="language"> 
                 <option value="English">English</option> 
@@ -43,8 +188,16 @@
                 <option value="Mandarin">Mandarin</option> 
                 <option value="French">French</option> 
             </select>
-            <input type=submit value=Upload>
+            <input type="submit" value="Upload Image">
         </form>
-    </center>
-</html>
+    </div>
+</body>
 
+<!-- Add a footer with imformation and links -->
+<footer>
+    <div class="container">
+        <p>Image Captioning Showcase 2024</p>
+        <p>Created by <a href="https://www.linkedin.com/in/tricao7/">Tri Cao</a></p>
+    </div>
+</footer>
+</html>
