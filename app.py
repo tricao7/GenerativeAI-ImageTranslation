@@ -66,4 +66,16 @@ def testing_page():
 
 
 if __name__ == "__main__":
+    base_images = os.path.join('static', 'images')
+    iamges = ['header_background.jpg', 'sample1.jpg',
+              'sample2.jpg', 'sample3.jpeg', 'sample4.jpg']
+    # delete images taht are not in the base images
+    # Note: This is to prevent user images from being saved
+    for file in os.listdir(base_images):
+        if file not in iamges:
+            os.remove(os.path.join(base_images, file))
     app.run(debug=True, port=2000)
+    # if the app is closed, the model will be deleted
+    del processor
+    del model
+
