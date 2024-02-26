@@ -14,6 +14,7 @@ def pretrained(hf_model="Salesforce/blip-image-captioning-large"):
         (Defualt: https://huggingface.co/Salesforce/blip-image-captioning-large)
     '''
     # A more lightweight alternative: "Salesforce/blip-image-captioning-base"
+    hf_model = "Salesforce/blip-image-captioning-base"
     processor = BlipProcessor.from_pretrained(hf_model)
     model = BlipForConditionalGeneration.from_pretrained(hf_model)
     return processor, model

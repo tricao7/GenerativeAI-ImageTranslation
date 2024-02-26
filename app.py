@@ -66,6 +66,7 @@ def testing_page():
 
 
 if __name__ == "__main__":
+    port = os.environ.get('PORT', 5000)
     base_images = os.path.join('static', 'images')
     iamges = ['header_background.jpg', 'sample1.jpg',
               'sample2.jpg', 'sample3.jpeg', 'sample4.jpg']
@@ -74,7 +75,7 @@ if __name__ == "__main__":
     for file in os.listdir(base_images):
         if file not in iamges:
             os.remove(os.path.join(base_images, file))
-    app.run(debug=True, port=2000)
+    app.run(debug=True, host='0.0.0.0', port=port)
     # if the app is closed, the model will be deleted
     del processor
     del model
