@@ -75,6 +75,7 @@ if __name__ == "__main__":
     for file in os.listdir(base_images):
         if file not in iamges:
             os.remove(os.path.join(base_images, file))
+    # Run the app
     app.run(debug=True, host='0.0.0.0', port=port)
     # if the app is closed, the model will be deleted
     del processor
