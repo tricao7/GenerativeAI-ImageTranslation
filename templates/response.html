@@ -61,6 +61,12 @@
             padding: 20px;
         }
 
+        .container figure {
+            margin: 0; /* Center the figure horizontally */
+            max-width: 150px; /* Set maximum width to ensure it fits within the margins */
+            align-self: center;
+        }
+
         h1 {
             text-align: center;
             margin-bottom: 30px;
@@ -89,6 +95,12 @@
             border-radius: 10px; /* Rounded corners */
         }
 
+        .image-slide figure {
+            margin: 0; /* Center the figure horizontally */
+            max-width: 80px; /* Set maximum width to ensure it fits within the margins */
+            align-self: center;
+        }
+
         .uploaded_image img {
             max-width: 600px;
             height: auto;
@@ -107,6 +119,7 @@
             border: 2px solid #ddd; /* Light grey border around caption */
             border-radius: 5px; /* Rounded corners */
             text-align: center;
+            align-items: center;
         }
 
         form {
@@ -162,21 +175,34 @@
             <div class="image-slide">
                 <img src="./static/images/sample1.jpg" alt="Image 1">
                 <div class="caption">'Skier In Mid Air Over Snowy Mountain With Mountain In Background'</div>
+                <figure>
+                    <audio controls src="./static/audio/sample1.wav"></audio>
+                </figure>
             </div>
             <div class="image-slide">
                 <img src="./static/images/sample2.jpg" alt="Image 2">
                 <div class="caption">'A Man And A Woman In A Kayak Paddling In The Water'</div>
+                <figure>
+                    <audio controls src="./static/audio/sample2.wav"></audio>
+                </figure>
             </div>
             <div class="image-slide">
                 <img src="./static/images/sample3.jpeg" alt="Image 3">
                 <div class="caption">'Snow Leopard Standing On A Rock In The Snow With Trees In The Background'</div>
+                <figure>
+                    <audio controls src="./static/audio/sample3.wav"></audio>
+                </figure>
             </div>
             <div class="image-slide">
                 <img src="./static/images/sample4.jpg" alt="Image 4">
                 <div class="caption">'Arafed View Of A Hotel With A Pool And A Full Moon'</div>
+                <figure>
+                    <audio controls src="./static/audio/sample4.wav"></audio>
+                </figure>
             </div>
             <!-- Add more image slides as needed -->
         </div>
+    </div>
 
         <div class="container">
             <h1>Your Image</h1>
@@ -184,6 +210,10 @@
                 <div class="uploaded_image">
                     <img src="{{ image_file }}" style="max-width: 100%; height: auto;" />
                     <div class="caption">'{{ caption }}'</div>
+                    <figure>
+                        <figcaption>Listen To Audio:</figcaption>
+                        <audio controls src="{{ audio_file }}"></audio>
+                    </figure>
                 </div>
             </div>
             <h1>Upload Another Image</h1>
